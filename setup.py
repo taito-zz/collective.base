@@ -5,7 +5,7 @@ from setuptools import setup
 setup(
     name='collective.base',
     version='0.1',
-    description='Provides base class for adapter which has commonly used methods.',
+    description='Base class for adapter with commonly used methods.',
     long_description=open("README.rst").read(),
     classifiers=[
         "Framework :: Plone",
