@@ -95,6 +95,22 @@ class TestCase(IntegrationTestCase):
         self.assertIsNone(base.get_brain(interfaces=IATFolder, **query))
         self.assertIsNone(base.get_object(interfaces=IATFolder, **query))
 
+        query['depth'] = 0
+        self.assertEqual(len(base.get_brains(**query)), 1)
+        self.assertEqual(len(base.get_content_listing(**query)), 1)
+        self.assertEqual(base.get_brain(**query).id, 'folder1')
+        self.assertEqual(base.get_object(**query).id, 'folder1')
+
+        setRoles(self.portal, TEST_USER_ID, ['Member'])
+
+        from plone.app.testing.helpers import logout
+        logout()
+
+        self.assertEqual(len(base.get_brains(**query)), 0)
+
+        query['unrestricted'] = True
+        self.assertEqual(len(base.get_brains(**query)), 1)
+
     def test__two_folders(self):
         from Products.ATContentTypes.interfaces.folder import IATFolder
         from collective.base.interfaces import IBaseAdapter

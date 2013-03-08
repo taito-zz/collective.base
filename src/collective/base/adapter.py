@@ -24,6 +24,8 @@ class BaseAdapter(grok.Adapter):
 
     def get_brains(self, interfaces=None, **query):
         """In default, find from path under the context."""
+
+        # Interfaces
         if interfaces is not None:
             if not isinstance(interfaces, list):
                 interfaces = [interfaces]
@@ -31,18 +33,29 @@ class BaseAdapter(grok.Adapter):
             if not isinstance(object_provides, list):
                 object_provides = [object_provides]
             query['object_provides'] = [interface.__identifier__ for interface in interfaces] + object_provides
+
         # Set default path
         path = query.get('path')
         if path is None:
             path = self.context_path
+
+        # Depth
         depth = query.get('depth')
         if depth:
             path = {'query': path, 'depth': depth}
         query['path'] = path
         sort_limit = query.get('sort_limit')
+
+        # Unrestricted
+        unrestricted = query.get('unrestricted')
+        catalog = self.catalog
+        if unrestricted:
+            catalog = self.catalog.unrestrictedSearchResults
+
+        brains = catalog(query)
         if sort_limit:
-            return self.catalog(query)[:sort_limit]
-        return self.catalog(query)
+            return brains[:sort_limit]
+        return brains
 
     def get_brain(self, interfaces=None, **query):
         brains = self.get_brains(interfaces=interfaces, **query)
