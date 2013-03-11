@@ -1,17 +1,17 @@
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
-from collective.base.interfaces import IBaseAdapter
+from collective.base.interfaces import IAdapter
 from five import grok
 from plone.app.contentlisting.interfaces import IContentListing
 from plone.memoize.instance import memoize
 from zope.interface import Interface
 
 
-class BaseAdapter(grok.Adapter):
+class Adapter(grok.Adapter):
     """Base class for adapters"""
 
     grok.context(Interface)
-    grok.provides(IBaseAdapter)
+    grok.provides(IAdapter)
 
     @property
     @memoize

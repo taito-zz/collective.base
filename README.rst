@@ -12,6 +12,11 @@ Currently tested with
 Changelog
 ---------
 
+0.3 (2013-03-11)
+================
+
+- Updated name of class. [taito]
+
 0.2 (2013-03-09)
 ================
 

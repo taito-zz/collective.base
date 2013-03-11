@@ -2,7 +2,7 @@ from zope.interface import Attribute
 from zope.interface import Interface
 
 
-class IBaseAdapter(Interface):
+class IAdapter(Interface):
     """Base interface for adapters"""
 
     def get_brains(interfaces=None, **query):  # pragma: no cover
