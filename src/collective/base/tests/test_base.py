@@ -17,11 +17,11 @@ class TestCase(IntegrationTestCase):
     def test_catalog(self):
 
         base = IAdapter(self.portal)
-        self.assertEqual(base.catalog, getToolByName(self.portal, 'portal_catalog'))
+        self.assertEqual(base.catalog(), getToolByName(self.portal, 'portal_catalog'))
 
     def test_context_path(self):
         base = IAdapter(self.portal)
-        self.assertEqual(base.context_path, '/plone')
+        self.assertEqual(base.context_path(), '/plone')
 
     def test__get_brains__empty(self):
         from Products.ATContentTypes.interfaces.folder import IATFolder
@@ -104,6 +104,7 @@ class TestCase(IntegrationTestCase):
         from plone.app.testing.helpers import logout
         logout()
 
+        base = IAdapter(self.portal)
         self.assertEqual(len(base.get_brains(**query)), 0)
 
         query['unrestricted'] = True
@@ -155,14 +156,10 @@ class TestCase(IntegrationTestCase):
         self.assertEqual(len(base.get_content_listing([IATDocument], object_provides=IATFolder.__identifier__)), 2)
 
     @mock.patch('collective.base.adapter.getToolByName')
-    def test_ulocalized_time(self, getToolByName):
-        from collective.base.interfaces import IAdapter
-        self.assertEqual(IAdapter(self.portal).ulocalized_time, getToolByName().ulocalized_time)
-
-    @mock.patch('collective.base.adapter.getToolByName')
     def test_getSessionData(self, getToolByName):
         from collective.base.interfaces import IAdapter
-        self.assertEqual(IAdapter(self.portal).getSessionData, getToolByName().getSessionData)
+        IAdapter(self.portal).getSessionData()
+        getToolByName().getSessionData.assert_called_with(create=True)
 
     def create_event(self, **kwargs):
         event = self.portal[self.portal.invokeFactory('Event', **kwargs)]
@@ -187,7 +184,7 @@ class TestCase(IntegrationTestCase):
             u'Feb 27, 2013 12:00 AM - Feb 28, 2013 12:00 AM'])
 
     def test_portal(self):
-        self.assertEqual(IAdapter(self.portal).portal, self.portal)
+        self.assertEqual(IAdapter(self.portal).portal(), self.portal)
 
     def test_portal_path(self):
-        self.assertEqual(IAdapter(self.portal).portal_path, '/plone')
+        self.assertEqual(IAdapter(self.portal).portal_path(), '/plone')
