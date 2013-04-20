@@ -3,9 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from collective.base.interfaces import IAdapter
 from plone.app.contentlisting.interfaces import IContentListing
 from plone.memoize.instance import memoize
-from zope.interface import Interface
 from zope.interface import implements
-from zope.component import adapts
 
 
 class Adapter(object):

@@ -12,6 +12,11 @@ Currently tested with
 Changelog
 ---------
 
+0.4.0.1 (2013-04-20)
+====================
+
+- For subclassing. [taito]
+
 0.4 (2013-04-15)
 ================
 
