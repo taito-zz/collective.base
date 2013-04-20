@@ -1,8 +1,8 @@
 from Products.CMFCore.utils import getToolByName
+from collective.base.interfaces import IAdapter
 from collective.base.tests.base import IntegrationTestCase
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
-from collective.base.interfaces import IAdapter
 
 import mock
 
@@ -13,6 +13,14 @@ class TestCase(IntegrationTestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
+
+    def test_instance(self):
+        from collective.base.adapter import Adapter
+        self.assertIsInstance(IAdapter(self.portal), Adapter)
+
+    def test_verifyObject(self):
+        from zope.interface.verify import verifyObject
+        self.assertTrue(verifyObject(IAdapter, IAdapter(self.portal)))
 
     def test_catalog(self):
 

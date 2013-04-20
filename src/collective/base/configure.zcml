@@ -2,6 +2,6 @@
   i18n_domain="collective.base"
   xmlns="http://namespaces.zope.org/zope">
 
-  <adapter factory=".adapter.Adapter" />
+  <adapter factory=".adapter.Adapter" for="*" provides=".interfaces.IAdapter" />
 
 </configure>

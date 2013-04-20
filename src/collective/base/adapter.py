@@ -11,7 +11,6 @@ from zope.component import adapts
 class Adapter(object):
     """Base class for adapters"""
 
-    adapts(Interface)
     implements(IAdapter)
 
     def __init__(self, context):
@@ -73,7 +72,6 @@ class Adapter(object):
     def get_content_listing(self, interfaces=None, **query):
         return IContentListing(self.get_brains(interfaces=interfaces, **query))
 
-    @memoize
     def getSessionData(self, create=True):
         """Returns getSessionData method.
 
