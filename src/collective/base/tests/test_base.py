@@ -186,10 +186,16 @@ class TestCase(IntegrationTestCase):
         res = []
         for item in base.get_content_listing(IATEvent, sort_on='start'):
             res.append(base.event_datetime(item))
-        self.assertEqual(res, [
-            u'Feb 25, 2013 12:00 AM',
-            u'Feb 26, 2013 08:00 PM - 10:00 PM',
-            u'Feb 27, 2013 12:00 AM - Feb 28, 2013 12:00 AM'])
+        try:
+            self.assertEqual(res, [
+                u'Feb 25, 2013 12:00 AM',
+                u'Feb 26, 2013 08:00 PM - 10:00 PM',
+                u'Feb 27, 2013 12:00 AM - Feb 28, 2013 12:00 AM'])
+        except AssertionError:
+            self.assertEqual(res, [
+                u'2013-02-25 00:00',
+                u'2013-02-26 20:00 - 22:00',
+                u'2013-02-27 00:00 - 2013-02-28 00:00'])
 
     def test_portal(self):
         self.assertEqual(IAdapter(self.portal).portal(), self.portal)
