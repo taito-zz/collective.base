@@ -1,4 +1,5 @@
 from zope.interface import Interface
+from zope.viewlet.interfaces import IViewlet as IBaseViewlet
 
 
 class IAdapter(Interface):
@@ -33,3 +34,10 @@ class IAdapter(Interface):
 
     def portal_path():  # pragma: no cover
         """Path of the portal"""
+
+
+class IViewlet(IBaseViewlet):
+    """Base viewlet interface to override method: render"""
+
+    def render():
+        """"""
