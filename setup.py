@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='collective.base',
-    version='0.4.0.1',
+    version='0.4.0.2',
     description='Base class for adapter with commonly used methods.',
     long_description=open("README.rst").read(),
     classifiers=[
