@@ -12,6 +12,11 @@ Currently tested with
 Changelog
 ---------
 
+0.4.0.3 (2013-05-01)
+====================
+
+- Added view: BaseFormView. [taito]
+
 0.4.0.2 (2013-04-30)
 ====================
 
