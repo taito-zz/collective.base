@@ -1,6 +1,11 @@
+from plone.app.layout.globals.interfaces import IViewView
+from zope.interface import Attribute
 from zope.interface import Interface
 from zope.viewlet.interfaces import IViewlet as IBaseViewlet
+from zope.viewlet.interfaces import IViewletManager
 
+
+# Adapter
 
 class IAdapter(Interface):
     """Base interface for adapters"""
@@ -35,6 +40,23 @@ class IAdapter(Interface):
     def portal_path():  # pragma: no cover
         """Path of the portal"""
 
+
+# View
+
+class IBaseFormView(IViewView):
+    """View interface for base form"""
+
+    title = Attribute('Title of context')
+    description = Attribute('Description of context')
+
+
+# Viewlet manager
+
+class IBaseFormViewletManager(IViewletManager):
+    """Viewlet manager interface for base form"""
+
+
+# Viewlet
 
 class IViewlet(IBaseViewlet):
     """Base viewlet interface to override method: render"""
