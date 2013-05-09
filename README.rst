@@ -12,20 +12,11 @@ Currently tested with
 Changelog
 ---------
 
-0.4.0.3 (2013-05-01)
+0.5 (2013-05-09)
 ====================
 
 - Added view: BaseFormView. [taito]
-
-0.4.0.2 (2013-04-30)
-====================
-
 - Added interface: IViewlet. [taito]
-
-0.4.0.1 (2013-04-20)
-====================
-
-- For subclassing. [taito]
 
 0.4 (2013-04-15)
 ================
