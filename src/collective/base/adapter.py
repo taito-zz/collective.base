@@ -1,24 +1,24 @@
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from collective.base.interfaces import IAdapter
-from five import grok
 from plone.app.contentlisting.interfaces import IContentListing
 from plone.memoize.instance import memoize
-from zope.interface import Interface
+from zope.interface import implements
 
 
-class Adapter(grok.Adapter):
+class Adapter(object):
     """Base class for adapters"""
 
-    grok.context(Interface)
-    grok.provides(IAdapter)
+    implements(IAdapter)
 
-    @property
+    def __init__(self, context):
+        self.context = context
+
     @memoize
     def catalog(self):
         return getToolByName(self.context, 'portal_catalog')
 
-    @property
+    @memoize
     def context_path(self):
         return '/'.join(aq_inner(self.context).getPhysicalPath())
 
@@ -37,7 +37,7 @@ class Adapter(grok.Adapter):
         # Set default path
         path = query.get('path')
         if path is None:
-            path = self.context_path
+            path = self.context_path()
 
         # Depth
         depth = query.get('depth')
@@ -48,9 +48,9 @@ class Adapter(grok.Adapter):
 
         # Unrestricted
         unrestricted = query.get('unrestricted')
-        catalog = self.catalog
+        catalog = self.catalog()
         if unrestricted:
-            catalog = self.catalog.unrestrictedSearchResults
+            catalog = catalog.unrestrictedSearchResults
 
         brains = catalog(query)
         if sort_limit:
@@ -70,24 +70,17 @@ class Adapter(grok.Adapter):
     def get_content_listing(self, interfaces=None, **query):
         return IContentListing(self.get_brains(interfaces=interfaces, **query))
 
-    @property
-    @memoize
-    def ulocalized_time(self):
-        """Return ulocalized_time method.
-
-        :rtype: method
-        """
-        return getToolByName(self.context, 'translation_service').ulocalized_time
-
-    @property
-    @memoize
-    def getSessionData(self):
+    def getSessionData(self, create=True):
         """Returns getSessionData method.
 
+        :param create: True or False
+        :type create: boolean
+
         :rtype: method
         """
-        return getToolByName(self.context, 'session_data_manager').getSessionData
+        return getToolByName(self.context, 'session_data_manager').getSessionData(create=create)
 
+    @memoize
     def event_datetime(self, item):
         """
         Returns datetime of event.
@@ -108,27 +101,26 @@ class Adapter(grok.Adapter):
         """
         start = item.start
         end = item.end
-        start_dt = self.ulocalized_time(start, long_format=True, context=self.context)
+        toLocalizedTime = self.context.restrictedTraverse('@@plone').toLocalizedTime
+        start_dt = toLocalizedTime(start, long_format=True)
         if start.Date() == end.Date():
             if start == end:
                 dt = start_dt
             else:
-                end_time = self.ulocalized_time(end, time_only=True)
+                end_time = toLocalizedTime(end, time_only=True)
                 dt = u'{} - {}'.format(start_dt, end_time)
         else:
-            end_dt = self.ulocalized_time(end, long_format=True, context=self.context)
+            end_dt = toLocalizedTime(end, long_format=True)
             dt = u'{} - {}'.format(start_dt, end_dt)
 
         return dt
 
-    @property
     @memoize
     def portal(self):
         """Returns portal object."""
         return getToolByName(self.context, 'portal_url').getPortalObject()
 
-    @property
     @memoize
     def portal_path(self):
         """Returns portal path."""
-        return '/'.join(self.portal.getPhysicalPath())
+        return '/'.join(self.portal().getPhysicalPath())

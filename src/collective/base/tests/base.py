@@ -1,9 +1,16 @@
+from Testing import ZopeTestCase as ztc
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 from plone.testing import z2
+from zope.annotation.interfaces import IAttributeAnnotatable
+from zope.interface import directlyProvides
+from zope.publisher.browser import TestRequest
 
+import mock
 import unittest
 
 
@@ -43,6 +50,19 @@ class IntegrationTestCase(unittest.TestCase):
     """Base class for integration tests."""
 
     layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        ztc.utils.setupCoreSessions(self.layer['app'])
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+
+    def create_view(self, view, context=None):
+        if context is None:
+            context = self.portal
+        request = TestRequest()
+        directlyProvides(request, IAttributeAnnotatable)
+        request.set = mock.Mock()
+        return view(context, request)
 
 
 class FunctionalTestCase(unittest.TestCase):
