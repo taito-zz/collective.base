@@ -12,8 +12,13 @@ Currently tested with
 Changelog
 ---------
 
+0.5.1 (2013-05-11)
+==================
+
+- Fixed catalog query. [taito]
+
 0.5 (2013-05-09)
-====================
+================
 
 - Added view: BaseFormView. [taito]
 - Added interface: IViewlet. [taito]

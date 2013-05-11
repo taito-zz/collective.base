@@ -41,7 +41,7 @@ class Adapter(object):
 
         # Depth
         depth = query.get('depth')
-        if depth:
+        if depth is not None:
             path = {'query': path, 'depth': depth}
         query['path'] = path
         sort_limit = query.get('sort_limit')
@@ -55,6 +55,7 @@ class Adapter(object):
         brains = catalog(query)
         if sort_limit:
             return brains[:sort_limit]
+
         return brains
 
     def get_brain(self, interfaces=None, **query):
