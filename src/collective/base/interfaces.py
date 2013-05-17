@@ -56,10 +56,35 @@ class IBaseFormViewletManager(IViewletManager):
     """Viewlet manager interface for base form"""
 
 
+class IRepeatedViewletManager(IViewletManager):
+    """Viewlet manager interface for repeated viewlet"""
+
+    def items():  # pragma: no cover
+        """Returns list
+
+        :rtype: list
+        """
+
+    def render():  # pragma: no cover
+        """Renders viewletmanager
+
+        :rtype: unicode
+        """
+
+
 # Viewlet
 
 class IViewlet(IBaseViewlet):
     """Base viewlet interface to override method: render"""
 
-    def render():
-        """"""
+    def render():  # pragma: no cover
+        """Renders viewlet
+
+        :rtype: unicode
+        """
+
+    def repeated(item):  # pragma: no cover
+        """Renders viewlet with argument
+
+        :rtype: unicode
+        """

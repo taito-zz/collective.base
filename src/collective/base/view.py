@@ -8,7 +8,7 @@ class BaseFormView(BrowserView):
     """Base view for base form"""
 
     implements(IBaseFormView)
-    template = ViewPageTemplateFile('templates/base-form.pt')
+    template = ViewPageTemplateFile('views/base-form.pt')
 
     title = None
     description = None
