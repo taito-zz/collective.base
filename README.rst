@@ -12,8 +12,8 @@ Currently tested with
 Changelog
 ---------
 
-0.6 (2013-05-xx)
-================
+0.5.1.1 (2013-05-xx)
+====================
 
 - Added viewlet manger to support repetition of usage of viewlet template. [taito]
 
