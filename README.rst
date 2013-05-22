@@ -12,7 +12,7 @@ Currently tested with
 Changelog
 ---------
 
-0.5.1.2 (2013-05-xx)
+0.5.1.2 (2013-05-22)
 ====================
 
 - Added method: available to viewlet. [taito]
