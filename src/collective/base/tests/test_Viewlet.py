@@ -30,3 +30,8 @@ class ViewletTestCase(unittest.TestCase):
         instance.render = mock.Mock()
         instance.repeated()
         self.assertTrue(instance.render.called)
+
+    def test_available(self):
+        context = mock.Mock()
+        instance = Viewlet(context, None, None, None)
+        self.assertTrue(instance.available())

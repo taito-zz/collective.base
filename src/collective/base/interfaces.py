@@ -88,3 +88,9 @@ class IViewlet(IBaseViewlet):
 
         :rtype: unicode
         """
+
+    def available():  # pragma: no cover
+        """Returns True or False
+
+        :rtype: bool
+        """

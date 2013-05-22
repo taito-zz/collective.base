@@ -11,5 +11,16 @@ class Viewlet(ViewletBase):
         raise NotImplementedError('Handle item')
 
     def repeated(self, item=None):
+        """Renders viewlet with argument
+
+        :rtype: unicode
+        """
         self._handle_repeated(item)
         return self.render()
+
+    def available(self):
+        """Returns True or False
+
+        :rtype: bool
+        """
+        return True

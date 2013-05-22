@@ -12,7 +12,12 @@ Currently tested with
 Changelog
 ---------
 
-0.5.1.1 (2013-05-xx)
+0.5.1.2 (2013-05-xx)
+====================
+
+- Added method: available to viewlet. [taito]
+
+0.5.1.1 (2013-05-17)
 ====================
 
 - Added viewlet manger to support repetition of usage of viewlet template. [taito]
