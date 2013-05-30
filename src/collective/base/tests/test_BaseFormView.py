@@ -20,4 +20,4 @@ class BaseFormViewTestCase(IntegrationTestCase):
     def test___call__(self):
         instance = self.create_view(BaseFormView)
         self.assertIsNone(instance())
-        instance.request.set.assert_called_with('disable_border', True)
+        self.assertTrue(instance.request.get('disable_border'))

@@ -1,11 +1,11 @@
 from collective.base.interfaces import IViewlet
+from collective.base.tests.base import IntegrationTestCase
 from collective.base.viewlet import Viewlet
 
 import mock
-import unittest
 
 
-class ViewletTestCase(unittest.TestCase):
+class ViewletTestCase(IntegrationTestCase):
     """TestCase for Viewlet"""
 
     def test_subclass(self):
@@ -16,13 +16,11 @@ class ViewletTestCase(unittest.TestCase):
 
     def test_verifyObject(self):
         from zope.interface.verify import verifyObject
-        context = mock.Mock()
-        instance = Viewlet(context, None, None, None)
+        instance = self.create_viewlet(Viewlet)
         self.assertTrue(verifyObject(IViewlet, instance))
 
     def test_repeated(self):
-        context = mock.Mock()
-        instance = Viewlet(context, None, None, None)
+        instance = self.create_viewlet(Viewlet)
         with self.assertRaises(NotImplementedError):
             instance.repeated()
 
@@ -32,6 +30,5 @@ class ViewletTestCase(unittest.TestCase):
         self.assertTrue(instance.render.called)
 
     def test_available(self):
-        context = mock.Mock()
-        instance = Viewlet(context, None, None, None)
+        instance = self.create_viewlet(Viewlet)
         self.assertTrue(instance.available())
