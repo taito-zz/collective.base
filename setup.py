@@ -4,8 +4,8 @@ from setuptools import setup
 
 setup(
     name='collective.base',
-    version='0.5.1.3',
-    description='Base class for adapter with commonly used methods.',
+    version='0.5.1.4',
+    description='Base class for plone with commonly used methods.',
     long_description=open("README.rst").read(),
     classifiers=[
         "Framework :: Plone",
