@@ -12,6 +12,11 @@ Currently tested with
 Changelog
 ---------
 
+0.5.1.4 (2013-06-01)
+====================
+
+- Add method: ``membership`` to ``collective.base.adapter.Adapter``. [taito]
+
 0.5.1.3 (2013-05-30)
 ====================
 

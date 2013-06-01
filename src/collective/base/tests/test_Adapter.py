@@ -202,3 +202,8 @@ class TestCase(IntegrationTestCase):
 
     def test_portal_path(self):
         self.assertEqual(IAdapter(self.portal).portal_path(), '/plone')
+
+    def test_membership(self):
+        from Products.PlonePAS.tools.membership import MembershipTool
+        adapter = IAdapter(self.portal)
+        self.assertIsInstance(adapter.membership(), MembershipTool)

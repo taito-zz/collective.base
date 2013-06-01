@@ -125,3 +125,7 @@ class Adapter(object):
     def portal_path(self):
         """Returns portal path."""
         return '/'.join(self.portal().getPhysicalPath())
+
+    @memoize
+    def membership(self):
+        return getToolByName(self.context, 'portal_membership')
