@@ -5,9 +5,9 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
-from plone.dexterity.utils import createContentInContainer
+# from plone.dexterity.utils import createContentInContainer
 from plone.testing import z2
-from zope.lifecycleevent import modified
+# from zope.lifecycleevent import modified
 
 import unittest
 
@@ -55,13 +55,13 @@ class IntegrationTestCase(unittest.TestCase):
         self.request = self.layer['request']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
-    def create_content(self, ctype, parent=None, **kwargs):
-        """Create instance of dexterity content type"""
-        if parent is None:
-            parent = self.portal
-        content = createContentInContainer(parent, ctype, checkConstraints=False, **kwargs)
-        modified(content)
-        return content
+    # def create_content(self, ctype, parent=None, **kwargs):
+    #     """Create instance of dexterity content type"""
+    #     if parent is None:
+    #         parent = self.portal
+    #     content = createContentInContainer(parent, ctype, checkConstraints=False, **kwargs)
+    #     modified(content)
+    #     return content
 
     def create_atcontent(self, ctype, parent=None, **kwargs):
         """Create instance of AT content type"""
