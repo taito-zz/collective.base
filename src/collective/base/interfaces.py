@@ -11,7 +11,7 @@ class IAdapter(Interface):
     """Base interface for adapters"""
 
     def catalog():  # pragma: no cover
-        """Returns portal_catalog"""
+        """Return portal_catalog"""
 
     def context_path():  # pragma: no cover
         """Path of the context"""
@@ -32,7 +32,7 @@ class IAdapter(Interface):
         """getSessionData method from session_data_manager"""
 
     def event_datetime(item):  # pragma: no cover
-        """Returns ulocalized_time event datetime."""
+        """Return ulocalized_time event datetime."""
 
     def portal():  # pragma: no cover
         """Portal object"""
@@ -43,14 +43,22 @@ class IAdapter(Interface):
 
 # View
 
-class IBaseFormView(IViewView):
-    """View interface for base form"""
+class IBaseView(IViewView):
+    """View interface for base view"""
 
     title = Attribute('Title of context')
     description = Attribute('Description of context')
 
 
+class IBaseFormView(IBaseView):
+    """View interface for base form"""
+
+
 # Viewlet manager
+
+class IBaseViewViewletManager(IViewletManager):
+    """Viewlet manager interface for base view"""
+
 
 class IBaseFormViewletManager(IViewletManager):
     """Viewlet manager interface for base form"""
@@ -60,13 +68,13 @@ class IRepeatedViewletManager(IViewletManager):
     """Viewlet manager interface for repeated viewlet"""
 
     def items():  # pragma: no cover
-        """Returns list
+        """Return list
 
         :rtype: list
         """
 
     def render():  # pragma: no cover
-        """Renders viewletmanager
+        """Render viewletmanager
 
         :rtype: unicode
         """
@@ -78,19 +86,19 @@ class IViewlet(IBaseViewlet):
     """Base viewlet interface to override method: render"""
 
     def render():  # pragma: no cover
-        """Renders viewlet
+        """Render viewlet
 
         :rtype: unicode
         """
 
     def repeated(item):  # pragma: no cover
-        """Renders viewlet with argument
+        """Render viewlet with argument
 
         :rtype: unicode
         """
 
     def available():  # pragma: no cover
-        """Returns True or False
+        """Return True or False
 
         :rtype: bool
         """

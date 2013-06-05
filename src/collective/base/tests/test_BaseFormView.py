@@ -7,17 +7,12 @@ class BaseFormViewTestCase(IntegrationTestCase):
     """TestCase for BaseFormView"""
 
     def test_subclass(self):
-        from Products.Five import BrowserView
-        self.assertTrue(issubclass(BaseFormView, BrowserView))
-        from plone.app.layout.globals.interfaces import IViewView
-        self.assertTrue(issubclass(IBaseFormView, IViewView))
+        from collective.base.view import BaseView as Base
+        self.assertTrue(issubclass(BaseFormView, Base))
+        from collective.base.interfaces import IBaseView as Base
+        self.assertTrue(issubclass(IBaseFormView, Base))
 
     def test_verifyObject(self):
         from zope.interface.verify import verifyObject
         instance = self.create_view(BaseFormView)
         self.assertTrue(verifyObject(IBaseFormView, instance))
-
-    def test___call__(self):
-        instance = self.create_view(BaseFormView)
-        self.assertIsNone(instance())
-        self.assertTrue(instance.request.get('disable_border'))

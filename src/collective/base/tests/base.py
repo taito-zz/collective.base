@@ -5,12 +5,10 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
+from plone.dexterity.utils import createContentInContainer
 from plone.testing import z2
-# from zope.annotation.interfaces import IAttributeAnnotatable
-# from zope.interface import directlyProvides
-# from zope.publisher.browser import TestRequest
+from zope.lifecycleevent import modified
 
-# import mock
 import unittest
 
 
@@ -57,6 +55,22 @@ class IntegrationTestCase(unittest.TestCase):
         self.request = self.layer['request']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
 
+    def create_content(self, ctype, parent=None, **kwargs):
+        """Create instance of dexterity content type"""
+        if parent is None:
+            parent = self.portal
+        content = createContentInContainer(parent, ctype, checkConstraints=False, **kwargs)
+        modified(content)
+        return content
+
+    def create_atcontent(self, ctype, parent=None, **kwargs):
+        """Create instance of AT content type"""
+        if parent is None:
+            parent = self.portal
+        content = parent[parent.invokeFactory(ctype, **kwargs)]
+        content.reindexObject()
+        return content
+
     def create_view(self, view, context=None):
         """Return instance of view
 
@@ -70,9 +84,6 @@ class IntegrationTestCase(unittest.TestCase):
         """
         if context is None:
             context = self.portal
-        # request = TestRequest()
-        # directlyProvides(self.request, IAttributeAnnotatable)
-        # request.set = mock.Mock()
         return view(context, self.request)
 
     def create_viewlet(self, viewlet, context=None, view=None, manager=None):
@@ -94,9 +105,6 @@ class IntegrationTestCase(unittest.TestCase):
         """
         if context is None:
             context = self.portal
-        # request = TestRequest()
-        # directlyProvides(request, IAttributeAnnotatable)
-        # request.set = mock.Mock()
         return viewlet(context, self.request, view, manager)
 
 

@@ -8,6 +8,15 @@
   <browser:viewletManager
     class="plone.app.viewletmanager.manager.OrderedViewletManager"
     for="*"
+    name="collective.base.viewlet-manager.base"
+    permission="zope2.View"
+    provides=".interfaces.IBaseViewViewletManager"
+    view=".interfaces.IBaseView"
+    />
+
+  <browser:viewletManager
+    class="plone.app.viewletmanager.manager.OrderedViewletManager"
+    for="*"
     name="collective.base.viewlet-manager.base-form"
     permission="zope2.View"
     provides=".interfaces.IBaseFormViewletManager"

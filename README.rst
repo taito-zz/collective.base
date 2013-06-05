@@ -12,6 +12,11 @@ Currently tested with
 Changelog
 ---------
 
+0.5.1.5 (2013-06-05)
+====================
+
+- Add base view: ``collective.base.view.BaseView``. [taito]
+
 0.5.1.4 (2013-06-01)
 ====================
 
