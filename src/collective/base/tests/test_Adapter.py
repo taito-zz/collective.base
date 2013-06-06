@@ -10,9 +10,9 @@ import mock
 class TestCase(IntegrationTestCase):
     """TestCase for Plone setup."""
 
-    def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+    def test_create_atcontent(self):
+        from Products.ATContentTypes.content.document import ATDocument
+        self.assertIsInstance(self.create_atcontent('Document', id='doc'), ATDocument)
 
     def test_instance(self):
         from collective.base.adapter import Adapter
