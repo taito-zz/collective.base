@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='collective.base',
-    version='0.5.1.6',
+    version='0.6.1',
     description='Base class for plone with commonly used methods.',
     long_description=open("README.rst").read(),
     classifiers=[
