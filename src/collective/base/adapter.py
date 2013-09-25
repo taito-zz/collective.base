@@ -43,6 +43,7 @@ class Adapter(object):
         depth = query.get('depth')
         if depth is not None:
             path = {'query': path, 'depth': depth}
+            del query['depth']
         query['path'] = path
         sort_limit = query.get('sort_limit')
 

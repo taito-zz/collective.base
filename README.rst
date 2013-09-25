@@ -7,39 +7,24 @@ collective.base provides base class for adapter with commonly used methods.
 Currently tested with
 ----------------------
 
-- Plone-4.3 and Python-2.7.4
+- Plone-4.3.1 and Python-2.7.x
 
 Changelog
 ---------
 
-0.5.1.6 (2013-06-06)
-====================
+0.6.1 (2013-09-25)
+==================
 
-- Cover tests. [taito]
+- Refactor method: ``get_brains``. [taito]
+- Tested with Plone-4.3.1. [taito]
 
-0.5.1.5 (2013-06-05)
-====================
+0.6 (2013-06-08)
+================
 
 - Add base view: ``collective.base.view.BaseView``. [taito]
-
-0.5.1.4 (2013-06-01)
-====================
-
 - Add method: ``membership`` to ``collective.base.adapter.Adapter``. [taito]
-
-0.5.1.3 (2013-05-30)
-====================
-
 - Add method: ``create_viewlet`` to ``collective.base.tests.base.IntegrationTestCase``. [taito]
-
-0.5.1.2 (2013-05-22)
-====================
-
 - Add method: ``available`` to ``collective.base.viewlet.Viewlet``. [taito]
-
-0.5.1.1 (2013-05-17)
-====================
-
 - Add viewlet manger to support repetition of usage of viewlet template. [taito]
 
 0.5.1 (2013-05-11)
