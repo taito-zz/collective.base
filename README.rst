@@ -7,10 +7,16 @@ collective.base provides base class for adapter with commonly used methods.
 Currently tested with
 ----------------------
 
-- Plone-4.3.1 and Python-2.7.x
+- Plone-4.3.2 and Python-2.7.x
 
 Changelog
 ---------
+
+0.7 (2013-11-11)
+================
+
+- Add method: ``get_objects`` to ``collective.base.adapter.Adapter``. [taito]
+- Tested with Plone-4.3.2. [taito]
 
 0.6.1 (2013-09-25)
 ==================

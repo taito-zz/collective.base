@@ -16,10 +16,12 @@ class Adapter(object):
 
     @memoize
     def catalog(self):
+        """Return portal_catalog"""
         return getToolByName(self.context, 'portal_catalog')
 
     @memoize
     def context_path(self):
+        """Path of the context"""
         return '/'.join(aq_inner(self.context).getPhysicalPath())
 
     def get_brains(self, interfaces=None, **query):
@@ -59,17 +61,24 @@ class Adapter(object):
 
         return brains
 
+    def get_objects(self, interfaces=None, **query):
+        """Get objects."""
+        return [brain.getObject() for brain in self.get_brains(interfaces=interfaces, **query)]
+
     def get_brain(self, interfaces=None, **query):
+        """Get brain which is supposed to be only one."""
         brains = self.get_brains(interfaces=interfaces, **query)
         if brains:
             return brains[0]
 
     def get_object(self, interfaces=None, **query):
+        """Get object which is supposed to be only one."""
         brain = self.get_brain(interfaces=interfaces, **query)
         if brain:
             return brain.getObject()
 
     def get_content_listing(self, interfaces=None, **query):
+        """Get ContentListing from brains gotten from get_brains method."""
         return IContentListing(self.get_brains(interfaces=interfaces, **query))
 
     def getSessionData(self, create=True):

@@ -19,6 +19,9 @@ class IAdapter(Interface):
     def get_brains(interfaces=None, **query):  # pragma: no cover
         """Get brains."""
 
+    def get_objects(interfaces=None, **query):  # pragma: no cover
+        """Get objects."""
+
     def get_brain(interfaces=None, **query):  # pragma: no cover
         """Get brain which is supposed to be only one."""
 
@@ -39,6 +42,9 @@ class IAdapter(Interface):
 
     def portal_path():  # pragma: no cover
         """Path of the portal"""
+
+    def membership():  # pragma: no cover
+        """Return portal_membership"""
 
 
 # View

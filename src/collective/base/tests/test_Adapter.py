@@ -38,11 +38,13 @@ class TestCase(IntegrationTestCase):
         query = {}
 
         self.assertEqual(len(base.get_brains(**query)), 0)
+        self.assertEqual(len(base.get_objects(**query)), 0)
         self.assertEqual(len(base.get_content_listing(**query)), 0)
         self.assertIsNone(base.get_brain(**query))
         self.assertIsNone(base.get_object(**query))
 
         self.assertEqual(len(base.get_brains(interfaces=IATFolder, **query)), 0)
+        self.assertEqual(len(base.get_objects(interfaces=IATFolder, **query)), 0)
         self.assertEqual(len(base.get_content_listing(interfaces=IATFolder, **query)), 0)
         self.assertIsNone(base.get_brain(interfaces=IATFolder, **query))
         self.assertIsNone(base.get_object(interfaces=IATFolder, **query))
@@ -58,11 +60,13 @@ class TestCase(IntegrationTestCase):
         query = {}
 
         self.assertEqual(len(base.get_brains(**query)), 1)
+        self.assertEqual(len(base.get_objects(**query)), 1)
         self.assertEqual(len(base.get_content_listing(**query)), 1)
         self.assertEqual(base.get_brain(**query).id, 'folder1')
         self.assertEqual(base.get_object(**query).id, 'folder1')
 
         self.assertEqual(len(base.get_brains(interfaces=IATFolder, **query)), 1)
+        self.assertEqual(len(base.get_objects(interfaces=IATFolder, **query)), 1)
         self.assertEqual(len(base.get_content_listing(interfaces=IATFolder, **query)), 1)
         self.assertEqual(base.get_brain(interfaces=IATFolder, **query).id, 'folder1')
         self.assertEqual(base.get_object(interfaces=IATFolder, **query).id, 'folder1')
@@ -70,39 +74,46 @@ class TestCase(IntegrationTestCase):
         query = {'path': '/'.join(folder1.getPhysicalPath())}
 
         self.assertEqual(len(base.get_brains(**query)), 1)
+        self.assertEqual(len(base.get_objects(**query)), 1)
         self.assertEqual(len(base.get_content_listing(**query)), 1)
         self.assertEqual(base.get_brain(**query).id, 'folder1')
         self.assertEqual(base.get_object(**query).id, 'folder1')
 
         self.assertEqual(len(base.get_brains(interfaces=IATFolder, **query)), 1)
+        self.assertEqual(len(base.get_objects(interfaces=IATFolder, **query)), 1)
         self.assertEqual(len(base.get_content_listing(interfaces=IATFolder, **query)), 1)
         self.assertEqual(base.get_brain(interfaces=IATFolder, **query).id, 'folder1')
         self.assertEqual(base.get_object(interfaces=IATFolder, **query).id, 'folder1')
 
         query['depth'] = 0
         self.assertEqual(len(base.get_brains(**query)), 1)
+        self.assertEqual(len(base.get_objects(**query)), 1)
         self.assertEqual(len(base.get_content_listing(**query)), 1)
         self.assertEqual(base.get_brain(**query).id, 'folder1')
         self.assertEqual(base.get_object(**query).id, 'folder1')
 
         self.assertEqual(len(base.get_brains(interfaces=IATFolder, **query)), 1)
+        self.assertEqual(len(base.get_objects(interfaces=IATFolder, **query)), 1)
         self.assertEqual(len(base.get_content_listing(interfaces=IATFolder, **query)), 1)
         self.assertEqual(base.get_brain(interfaces=IATFolder, **query).id, 'folder1')
         self.assertEqual(base.get_object(interfaces=IATFolder, **query).id, 'folder1')
 
         query['depth'] = 1
         self.assertEqual(len(base.get_brains(**query)), 0)
+        self.assertEqual(len(base.get_objects(**query)), 0)
         self.assertEqual(len(base.get_content_listing(**query)), 0)
         self.assertIsNone(base.get_brain(**query))
         self.assertIsNone(base.get_object(**query))
 
         self.assertEqual(len(base.get_brains(interfaces=IATFolder, **query)), 0)
+        self.assertEqual(len(base.get_objects(interfaces=IATFolder, **query)), 0)
         self.assertEqual(len(base.get_content_listing(interfaces=IATFolder, **query)), 0)
         self.assertIsNone(base.get_brain(interfaces=IATFolder, **query))
         self.assertIsNone(base.get_object(interfaces=IATFolder, **query))
 
         query['depth'] = 0
         self.assertEqual(len(base.get_brains(**query)), 1)
+        self.assertEqual(len(base.get_objects(**query)), 1)
         self.assertEqual(len(base.get_content_listing(**query)), 1)
         self.assertEqual(base.get_brain(**query).id, 'folder1')
         self.assertEqual(base.get_object(**query).id, 'folder1')
@@ -130,16 +141,20 @@ class TestCase(IntegrationTestCase):
         query = {}
 
         self.assertEqual(len(base.get_brains(**query)), 2)
+        self.assertEqual(len(base.get_objects(**query)), 2)
         self.assertEqual(len(base.get_content_listing(**query)), 2)
 
         self.assertEqual(len(base.get_brains(interfaces=IATFolder, **query)), 2)
+        self.assertEqual(len(base.get_objects(interfaces=IATFolder, **query)), 2)
         self.assertEqual(len(base.get_content_listing(interfaces=IATFolder, **query)), 2)
 
         query['sort_limit'] = 1
         self.assertEqual(len(base.get_brains(**query)), 1)
+        self.assertEqual(len(base.get_objects(**query)), 1)
         self.assertEqual(len(base.get_content_listing(**query)), 1)
 
         self.assertEqual(len(base.get_brains(interfaces=IATFolder, **query)), 1)
+        self.assertEqual(len(base.get_objects(interfaces=IATFolder, **query)), 1)
         self.assertEqual(len(base.get_content_listing(interfaces=IATFolder, **query)), 1)
 
     def test__folder_and_document(self):
@@ -153,14 +168,17 @@ class TestCase(IntegrationTestCase):
         doc1.reindexObject()
 
         self.assertEqual(len(base.get_brains(IATDocument)), 1)
+        self.assertEqual(len(base.get_objects(IATDocument)), 1)
         self.assertEqual(len(base.get_content_listing(IATDocument)), 1)
         self.assertEqual(base.get_brain(IATDocument).id, 'doc1')
         self.assertEqual(base.get_object(IATDocument).id, 'doc1')
 
         self.assertEqual(len(base.get_brains([IATDocument, IATFolder])), 2)
+        self.assertEqual(len(base.get_objects([IATDocument, IATFolder])), 2)
         self.assertEqual(len(base.get_content_listing([IATDocument, IATFolder])), 2)
 
         self.assertEqual(len(base.get_brains([IATDocument], object_provides=IATFolder.__identifier__)), 2)
+        self.assertEqual(len(base.get_objects([IATDocument], object_provides=IATFolder.__identifier__)), 2)
         self.assertEqual(len(base.get_content_listing([IATDocument], object_provides=IATFolder.__identifier__)), 2)
 
     @mock.patch('collective.base.adapter.getToolByName')
