@@ -12,6 +12,11 @@ Currently tested with
 Changelog
 ---------
 
+0.8 (2015-xx-xx)
+================
+
+- Add helper methods to class: ``IntegrationTestCase``. [taito]
+
 0.7 (2013-11-11)
 ================
 
