@@ -7,13 +7,13 @@ collective.base provides base class for adapter with commonly used methods.
 Currently tested with
 ----------------------
 
-- Plone-4.3.2 and Python-2.7.x
+- Plone-4.3.7 and Python-2.7.x
 
 Changelog
 ---------
 
-0.8 (2015-xx-xx)
-================
+0.7.1 (2015-11-01)
+==================
 
 - Add helper methods to class: ``IntegrationTestCase``. [taito]
 
