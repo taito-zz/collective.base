@@ -26,7 +26,7 @@ setup(
     install_requires=[
         'Products.CMFPlone',
         'setuptools'],
-    extras_require={'test': ['mock', 'plone.app.testing']},
+    extras_require={'test': ['plone.dexterity', 'mock', 'plone.app.testing']},
     entry_points="""
     # -*- Entry points: -*-
 

@@ -21,6 +21,8 @@ class CollectiveBaseLayer(PloneSandboxLayer):
         z2.installProduct(app, 'Products.PythonScripts')
 
         # Load ZCML
+        import plone.dexterity
+        self.loadZCML(package=plone.dexterity)
         import collective.base
         self.loadZCML(package=collective.base)
 
