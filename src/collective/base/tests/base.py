@@ -97,6 +97,12 @@ class IntegrationTestCase(unittest.TestCase):
             context = self.portal
         return viewlet(context, self.request, view, manager)
 
+    def get_roles(self, context, permission):
+        return sorted([item['name'] for item in context.rolesOfPermission(permission) if item['selected'] == 'SELECTED'])
+
+    def get_record(self, name):
+        return getUtility(IRegistry).records.get(name)
+
 
 class FunctionalTestCase(unittest.TestCase):
     """Base class for functional tests."""
